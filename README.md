@@ -1,61 +1,88 @@
+# AI業務自動化ポートフォリオ
+
 ## ■ 強み（できること）
 業務フロー設計からAI連携・自動化まで一貫して構築可能
 
-# AI業務自動化サンプル
+---
 
 ## ■ 概要
-LINE・AI・スプレッドシートを連携し、業務フロー全体を自動化する仕組みを構築
+AI・スプレッドシート・API連携を活用し、業務フロー全体を自動化する仕組みを構築
 
-## ■ できること
-・LINEからの入力を自動取得  
+単なるツール導入ではなく、
+「データ取得 → AI処理 → 業務ロジック → 出力」までを一貫して設計・実装
+
+---
+
+## ■ 実績①：勤怠管理自動集計システム
+
+### 概要
+CSVデータを取り込み、勤怠データの集計・残業計算・シート生成までを自動化
+
+### 主な機能
+・15日締めなどの複雑な集計ロジックに対応  
+・曜日別ルールによる残業・休憩計算  
+・データ取込〜集計〜出力まで一貫して自動化  
+・翌月テンプレートの自動生成  
+
+### 技術
+Google Apps Script（GAS） / スプレッドシート / データ処理
+
+---
+
+## ■ 実績②：PDF → 会計データ自動化
+
+### 概要
+総勘定元帳のPDFをAIで解析し、仕訳データとしてスプレッドシートへ自動転記
+
+### 主な機能
+・Gemini APIを活用したPDF解析  
+・JSON形式でのデータ抽出  
+・科目マスタと連携したコード自動変換  
+・仕訳データとして整形・自動入力  
+・処理後ファイルの自動振り分け  
+
+### 技術
+Gemini API / GAS / スプレッドシート / データ処理
+
+---
+
+## ■ 実績③：LINE × AI 業務自動化
+
+### 概要
+LINEを起点に、AI処理・データ記録・自動返信までを一貫して自動化
+
+### 主な機能
+・LINE Webhookによるデータ取得  
 ・AIによる内容分類・処理  
 ・スプレッドシートへの自動記録  
 ・条件に応じた自動返信  
 
-## ■ 使用ツール
-・ChatGPT / Claude / Gemini  
+### 技術
+LINE Messaging API / GAS / ChatGPT / Claude / Gemini
+
+---
+
+## ■ 全体構成イメージ
+入力 → データ取得 → AI処理 → 業務ロジック → データ保存 → 出力（返信・帳票）
+
+---
+
+## ■ 技術スタック
 ・Google Apps Script（GAS）  
+・ChatGPT / Claude / Gemini  
 ・LINE Messaging API  
+・スプレッドシート  
+・API連携 / データ処理  
 
-## ■ 構成
-LINE → Webhook → GAS → AI処理 → スプレッドシート保存 → 自動返信  
-※実際の業務で使用することを想定した設計
+---
 
-## ■ 実装イメージ（GASサンプル）
-```javascript
-function doPost(e) {
-  const data = JSON.parse(e.postData.contents);
-  const message = data.events[0].message.text;
+## ■ ポイント
+・業務理解をベースにした自動化設計  
+・複雑な業務ルールへの対応  
+・AIと既存業務の統合設計  
+・実運用を前提とした仕組み構築  
 
-  // AI処理（簡易例）
-  const aiResponse = callAI(message);
+---
 
-  // スプレッドシートに保存
-  const sheet = SpreadsheetApp.openById("YOUR_SHEET_ID").getSheetByName("log");
-  sheet.appendRow([new Date(), message, aiResponse]);
-
-  // LINE返信
-  replyToLine(data.events[0].replyToken, aiResponse);
-}
-
-function callAI(text) {
-  // ChatGPTやClaude APIを想定
-  return "AI処理結果：" + text;
-}
-
-function replyToLine(token, message) {
-  const url = "https://api.line.me/v2/bot/message/reply";
-  const payload = {
-    replyToken: token,
-    messages: [{ type: "text", text: message }]
-  };
-
-  UrlFetchApp.fetch(url, {
-    method: "post",
-    headers: {
-      "Authorization": "Bearer YOUR_ACCESS_TOKEN",
-      "Content-Type": "application/json"
-    },
-    payload: JSON.stringify(payload)
-  });
-}
+## ■ GitHubについて
+本リポジトリでは、実務での自動化構成・設計思想を中心にまとめています。
