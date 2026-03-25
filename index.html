@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — 業務自動化エンジニア</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#0a0a0f;
+  --surface:#12121a;
+  --surface2:#1a1a28;
+  --border:#2a2a3a;
+  --text:#e8e6f0;
+  --text-dim:#8888a0;
+  --accent:#4f8cff;
+  --accent2:#7c5cfc;
+  --accent3:#00d4aa;
+  --accent-glow:rgba(79,140,255,0.15);
+  --gradient:linear-gradient(135deg,#4f8cff,#7c5cfc);
+  --gradient2:linear-gradient(135deg,#00d4aa,#4f8cff);
+  --font-sans:'Noto Sans JP',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle,rgba(79,140,255,0.08),transparent 70%);
+  top:-100px;right:-100px;
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(124,92,252,0.06),transparent 70%);
+  bottom:-80px;left:-80px;
+  pointer-events:none;
+}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--surface2);border:1px solid var(--border);
+  padding:.4rem 1rem;border-radius:999px;
+  font-size:.8rem;color:var(--accent);
+  font-family:var(--font-mono);
+  margin-bottom:2rem;
+  animation:fadeUp .8s ease;
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;
+  background:var(--accent3);border-radius:50%;
+  animation:pulse 2s infinite;
+}
+
+.hero h1{
+  font-size:clamp(2.2rem,6vw,4.5rem);
+  font-weight:900;
+  letter-spacing:-.03em;
+  line-height:1.15;
+  margin-bottom:1.5rem;
+  animation:fadeUp .8s ease .1s both;
+}
+.hero h1 .gradient-text{
+  background:var(--gradient);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero-sub{
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:var(--text-dim);
+  max-width:640px;
+  margin-bottom:3rem;
+  font-weight:300;
+  animation:fadeUp .8s ease .2s both;
+}
+
+.hero-stats{
+  display:flex;gap:3rem;flex-wrap:wrap;justify-content:center;
+  animation:fadeUp .8s ease .3s both;
+}
+.stat{text-align:center}
+.stat-num{
+  font-size:2.4rem;font-weight:900;
+  font-family:var(--font-mono);
+  background:var(--gradient);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.stat-label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
+
+/* ===== SECTIONS ===== */
+section{padding:5rem 1.5rem}
+.container{max-width:1100px;margin:0 auto}
+
+.section-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  margin-bottom:1rem;
+}
+.section-label::before{
+  content:'';width:24px;height:1px;background:var(--accent);
+}
+
+.section-title{
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:900;
+  letter-spacing:-.02em;
+  margin-bottom:1rem;
+}
+
+.section-desc{
+  color:var(--text-dim);
+  max-width:600px;
+  margin-bottom:3.5rem;
+  font-weight:300;
+}
+
+/* ===== PROJECT CARDS ===== */
+.projects{display:flex;flex-direction:column;gap:4rem}
+
+.project-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  transition:border-color .3s,transform .3s;
+}
+.project-card:hover{
+  border-color:var(--accent);
+  transform:translateY(-4px);
+}
+
+.project-header{
+  padding:2.5rem 2.5rem 0;
+  display:flex;align-items:flex-start;gap:1.5rem;
+  flex-wrap:wrap;
+}
+
+.project-icon{
+  width:56px;height:56px;
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;
+  flex-shrink:0;
+}
+.project-icon.line{background:linear-gradient(135deg,#06c755,#00b843)}
+.project-icon.clock{background:linear-gradient(135deg,#4f8cff,#3a6fd8)}
+.project-icon.app{background:linear-gradient(135deg,#7c5cfc,#6240d9)}
+.project-icon.shift{background:linear-gradient(135deg,#00d4aa,#00b894)}
+
+.project-meta{flex:1;min-width:240px}
+.project-meta h3{
+  font-size:1.4rem;font-weight:700;
+  margin-bottom:.3rem;
+}
+.project-tagline{
+  color:var(--text-dim);font-size:.9rem;font-weight:300;
+}
+
+.project-tags{
+  display:flex;flex-wrap:wrap;gap:.4rem;
+  padding:0 2.5rem;
+  margin-top:1.2rem;
+}
+.tag{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  padding:.25rem .65rem;
+  border-radius:6px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  color:var(--text-dim);
+}
+
+.project-body{
+  padding:2rem 2.5rem 2.5rem;
+}
+
+.project-body p{
+  color:var(--text-dim);
+  font-size:.95rem;
+  line-height:1.8;
+  margin-bottom:1.5rem;
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;
+}
+
+.feature{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.2rem;
+  transition:border-color .3s;
+}
+.feature:hover{border-color:var(--accent)}
+
+.feature-title{
+  font-size:.85rem;font-weight:600;
+  margin-bottom:.3rem;
+  display:flex;align-items:center;gap:.4rem;
+}
+.feature-title .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent3);flex-shrink:0;
+}
+
+.feature p{
+  font-size:.8rem;color:var(--text-dim);
+  line-height:1.6;margin:0;
+}
+
+/* ===== ARCHITECTURE ===== */
+.arch-flow{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2rem;
+  margin-top:1.5rem;
+  overflow-x:auto;
+}
+
+.flow-row{
+  display:flex;align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  flex-wrap:wrap;
+  margin-bottom:.8rem;
+}
+
+.flow-node{
+  padding:.6rem 1.2rem;
+  border-radius:10px;
+  font-size:.8rem;
+  font-weight:500;
+  white-space:nowrap;
+  text-align:center;
+}
+.flow-node.user{background:rgba(0,212,170,0.12);border:1px solid rgba(0,212,170,0.3);color:#00d4aa}
+.flow-node.bot{background:rgba(79,140,255,0.12);border:1px solid rgba(79,140,255,0.3);color:#4f8cff}
+.flow-node.ai{background:rgba(124,92,252,0.12);border:1px solid rgba(124,92,252,0.3);color:#7c5cfc}
+.flow-node.data{background:rgba(255,180,50,0.12);border:1px solid rgba(255,180,50,0.3);color:#ffb432}
+.flow-arrow{color:var(--text-dim);font-size:1.2rem}
+
+/* ===== TECH STACK ===== */
+.tech-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1rem;
+  margin-top:2rem;
+}
+
+.tech-item{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.5rem;
+  text-align:center;
+  transition:border-color .3s,transform .3s;
+}
+.tech-item:hover{border-color:var(--accent);transform:translateY(-2px)}
+
+.tech-icon{font-size:2rem;margin-bottom:.6rem;display:block}
+.tech-name{font-weight:600;font-size:.9rem;margin-bottom:.2rem}
+.tech-desc{font-size:.75rem;color:var(--text-dim)}
+
+/* ===== STRENGTHS ===== */
+.strengths-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+}
+
+.strength-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.strength-card:hover{border-color:var(--accent)}
+
+.strength-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+}
+.strength-card:nth-child(1)::before{background:var(--gradient)}
+.strength-card:nth-child(2)::before{background:var(--gradient2)}
+.strength-card:nth-child(3)::before{background:linear-gradient(135deg,#ff6b6b,#ffa07a)}
+
+.strength-num{
+  font-family:var(--font-mono);
+  font-size:.7rem;color:var(--accent);
+  margin-bottom:.8rem;
+}
+.strength-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
+.strength-card p{font-size:.9rem;color:var(--text-dim);line-height:1.7}
+
+/* ===== CONTACT ===== */
+.contact-section{
+  text-align:center;
+  padding:6rem 1.5rem;
+  position:relative;
+}
+.contact-section::before{
+  content:'';position:absolute;
+  width:400px;height:400px;
+  background:radial-gradient(circle,rgba(79,140,255,0.06),transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.contact-box{
+  display:inline-flex;flex-direction:column;align-items:center;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:3rem 4rem;
+  position:relative;
+}
+
+.contact-box h2{
+  font-size:1.8rem;font-weight:900;margin-bottom:.5rem;
+}
+.contact-box p{
+  color:var(--text-dim);font-size:.95rem;margin-bottom:1.5rem;max-width:400px;
+}
+
+.contact-info{
+  font-family:var(--font-mono);
+  font-size:.85rem;
+  color:var(--accent);
+  background:var(--surface2);
+  padding:.8rem 1.8rem;
+  border-radius:10px;
+  border:1px solid var(--border);
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:2rem;
+  border-top:1px solid var(--border);
+  font-size:.75rem;
+  color:var(--text-dim);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:.4}
+}
+
+.fade-in{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero-stats{gap:2rem}
+  .project-header{padding:1.5rem 1.5rem 0}
+  .project-tags{padding:0 1.5rem}
+  .project-body{padding:1.5rem}
+  .contact-box{padding:2rem 1.5rem}
+  .feature-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-badge">AVAILABLE FOR WORK</div>
+  <h1>業務の「手作業」を<br><span class="gradient-text">仕組みで解決する</span></h1>
+  <p class="hero-sub">GAS × AI × LINE で、現場の業務フローをゼロから自動化。<br>設計から実装・運用まで一貫して対応します。</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">4+</div>
+      <div class="stat-label">Systems Built</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">GAS</div>
+      <div class="stat-label">Core Stack</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">AI</div>
+      <div class="stat-label">API Integration</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label fade-in">Projects</div>
+    <h2 class="section-title fade-in">構築実績</h2>
+    <p class="section-desc fade-in">実際に設計・構築し、現場で運用されているシステムです。</p>
+
+    <div class="projects">
+
+      <!-- PROJECT 1: LINE × AI -->
+      <article class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon line">💬</div>
+          <div class="project-meta">
+            <h3>LINE × AI 発注システム</h3>
+            <p class="project-tagline">LINEから送るだけで、発注・検索・経理処理を自動化</p>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">GAS</span>
+          <span class="tag">LINE Messaging API</span>
+          <span class="tag">Gemini API</span>
+          <span class="tag">Webhook</span>
+          <span class="tag">Spreadsheet</span>
+        </div>
+        <div class="project-body">
+          <p>現場スタッフがLINEからテキストや画像を送信するだけで、AIが内容を自動判定。発注処理、在庫検索（表記ゆれ対応）、空箱・納品書の画像解析、経理データ登録までをワンストップで処理します。</p>
+
+          <div class="arch-flow">
+            <div class="flow-row">
+              <div class="flow-node user">📱 現場スタッフ</div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node bot">🤖 LINE Bot</div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node bot">⚙️ doPost ルーター</div>
+            </div>
+            <div class="flow-row">
+              <div class="flow-node ai">🧠 Gemini API</div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node data">📊 スプレッドシート</div>
+              <span class="flow-arrow">→</span>
+              <div class="flow-node user">📱 LINE 返信</div>
+            </div>
+          </div>
+
+          <div class="feature-grid" style="margin-top:1.5rem">
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>AIメッセージ振り分け</div>
+              <p>テキスト・画像・ポストバックを自動分類し、適切な処理フローにルーティング</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>表記ゆれ検索</div>
+              <p>Gemini APIで商品名の表記ゆれを吸収し、正確な在庫・価格情報を返答</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>画像解析</div>
+              <p>空箱写真・納品書画像をAIが種別判定し、経理データとして自動記録</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>堅牢な設計</div>
+              <p>指数バックオフ・リトライ、重複チェック、操作ログ記録で安定運用</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2: 勤怠自動集計 -->
+      <article class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon clock">⏱️</div>
+          <div class="project-meta">
+            <h3>勤怠自動集計システム</h3>
+            <p class="project-tagline">タイムカードCSVをボタン1つで月次集計完了</p>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">GAS</span>
+          <span class="tag">Google Drive API</span>
+          <span class="tag">Spreadsheet</span>
+          <span class="tag">CSV処理</span>
+        </div>
+        <div class="project-body">
+          <p>タイムレコーダーから出力された打刻データ（CSV）を、会社固有の複雑なルールに基づいて自動計算。毎日の詳細シート・月間合計シート・翌月テンプレートまで自動生成し、手作業によるミスと時間を大幅に削減しました。</p>
+
+          <div class="feature-grid">
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>15日締め自動振り分け</div>
+              <p>1/16〜2/15のデータを「2月度」として自動集約</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>曜日別ルール適用</div>
+              <p>月曜は休憩75分・19:30から残業、木曜は休憩なし等の複雑ルールを自動判定</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>休日・特別計算</div>
+              <p>祝日・法定休日・日曜の自動判定と休日出勤時間の特別カウント</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>個人別ルール</div>
+              <p>「Aさんは17:00から残業」など従業員個別のイレギュラー対応</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>データ自動整理</div>
+              <p>集計済みCSVは「処理済保管用」フォルダに自動移動。二重集計を防止</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>翌月準備も自動</div>
+              <p>集計完了と同時に翌月の空テンプレートシートを自動生成</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3: 勤怠管理アプリ -->
+      <article class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon app">📲</div>
+          <div class="project-meta">
+            <h3>スマート勤怠管理アプリ</h3>
+            <p class="project-tagline">AppSheet × スプレッドシートで打刻〜承認を一元管理</p>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">AppSheet</span>
+          <span class="tag">Google Spreadsheet</span>
+          <span class="tag">PIN認証</span>
+          <span class="tag">リアルタイム同期</span>
+        </div>
+        <div class="project-body">
+          <p>従業員はタブレットから出勤・退勤を打刻（PIN認証で本人確認）。データは1秒でクラウド同期され、管理者はスマホ/PCからリアルタイムで出勤状況を確認し、打刻修正の承認・却下をワンタップで行えます。</p>
+
+          <div class="feature-grid">
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>従業員側 — 入力専用モード</div>
+              <p>打刻と申請のみ可能。他スタッフの勤務記録は一切非表示のセキュリティ設計</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>管理者側 — 全データ閲覧</div>
+              <p>隠しメニューから全員の出勤状況をリアルタイム把握。ワンタップ承認対応</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>クラウド自動処理</div>
+              <p>申請データは裏側で自動的に「申請中」ステータスに切り替わり、管理者に通知</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 4: シフト作成 -->
+      <article class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon shift">📅</div>
+          <div class="project-meta">
+            <h3>自動シフト作成システム</h3>
+            <p class="project-tagline">半日かかっていたシフト作成をボタン1つ＋微調整で完了</p>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">GAS</span>
+          <span class="tag">Spreadsheet</span>
+          <span class="tag">祝日判定</span>
+          <span class="tag">自動警告</span>
+        </div>
+        <div class="project-body">
+          <p>希望休をリストに入力し作成ボタンを押すだけで、AIがシフトの約80%を自動生成。人数不足の日は赤く警告表示され、その部分だけ手動調整すれば完成。A4印刷にも最適化されたレイアウトで、そのまま現場に貼り出せます。</p>
+
+          <div class="feature-grid">
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>カレンダー自動生成</div>
+              <p>開始日指定で1ヶ月分の日付・曜日を配置。祝日は自動判定で赤色表示</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>希望休の自動反映</div>
+              <p>スタッフの休み希望を自動読み取り、シフト表に「㊡」マークで反映</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>人数不足アラート</div>
+              <p>午前・午後の必要人数を下回る日を赤く警告。確認漏れを防止</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>労働時間自動計算</div>
+              <p>休憩時間・分勤務を考慮した実労働時間と出勤日数を正確に自動集計</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== TECH STACK ===== -->
+<section id="tech">
+  <div class="container">
+    <div class="section-label fade-in">Tech Stack</div>
+    <h2 class="section-title fade-in">使用技術</h2>
+    <p class="section-desc fade-in">プロジェクトで実際に使用しているツール・技術です。</p>
+
+    <div class="tech-grid">
+      <div class="tech-item fade-in">
+        <span class="tech-icon">⚙️</span>
+        <div class="tech-name">Google Apps Script</div>
+        <div class="tech-desc">バックエンド処理全般</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">📊</span>
+        <div class="tech-name">Google Spreadsheet</div>
+        <div class="tech-desc">データベース・集計</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">💬</span>
+        <div class="tech-name">LINE Messaging API</div>
+        <div class="tech-desc">Bot構築・Webhook連携</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">🧠</span>
+        <div class="tech-name">Gemini API</div>
+        <div class="tech-desc">AI解析・自然言語処理</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">📲</span>
+        <div class="tech-name">AppSheet</div>
+        <div class="tech-desc">ノーコードアプリ構築</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">🤖</span>
+        <div class="tech-name">ChatGPT / Claude</div>
+        <div class="tech-desc">開発支援・プロンプト設計</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">📁</span>
+        <div class="tech-name">Google Drive API</div>
+        <div class="tech-desc">ファイル自動管理</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">🔗</span>
+        <div class="tech-name">Webhook / REST API</div>
+        <div class="tech-desc">外部サービス連携</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRENGTHS ===== -->
+<section id="strengths">
+  <div class="container">
+    <div class="section-label fade-in">Strengths</div>
+    <h2 class="section-title fade-in">強み</h2>
+    <p class="section-desc fade-in"></p>
+
+    <div class="strengths-grid">
+      <div class="strength-card fade-in">
+        <div class="strength-num">01</div>
+        <h3>現場目線の設計力</h3>
+        <p>「ITに詳しくない現場スタッフ」が迷わず使えることを最優先に設計。ボタン1つ、LINE送信1つで完結する操作性を徹底しています。利用ガイドの作成まで対応します。</p>
+      </div>
+      <div class="strength-card fade-in">
+        <div class="strength-num">02</div>
+        <h3>設計から運用まで一貫対応</h3>
+        <p>業務フローのヒアリング → 全体設計 → GAS実装 → API連携 → テスト → 運用ドキュメント作成まで、ワンストップで対応可能。外部ツールとの連携設計も得意です。</p>
+      </div>
+      <div class="strength-card fade-in">
+        <div class="strength-num">03</div>
+        <h3>AI活用による高速開発</h3>
+        <p>ChatGPT・Claude・Geminiを開発プロセスに組み込み、コード生成・デバッグ・ドキュメント作成を高速化。AIプロンプト設計の知見を活かし、システム内のAI連携も実装します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact-section">
+  <div class="contact-box fade-in">
+    <h2>お気軽にご相談ください</h2>
+    <p>業務フローの自動化について、まずはお話をお聞かせください。最適な構成をご提案いたします。</p>
+    <div class="contact-info">
+      週15〜20時間稼働可能 ／ オンライン面談対応可
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Portfolio — 業務自動化エンジニア</p>
+</footer>
+
+<script>
+// Intersection Observer for fade-in animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
