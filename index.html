@@ -22,6 +22,7 @@
   --accent-glow:rgba(79,140,255,0.15);
   --gradient:linear-gradient(135deg,#4f8cff,#7c5cfc);
   --gradient2:linear-gradient(135deg,#00d4aa,#4f8cff);
+  --gradient3:linear-gradient(135deg,#ff6b6b,#ffa07a);
   --font-sans:'Noto Sans JP',sans-serif;
   --font-mono:'JetBrains Mono',monospace;
 }
@@ -36,7 +37,6 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== HERO ===== */
 .hero{
   min-height:100vh;
   display:flex;flex-direction:column;
@@ -94,7 +94,7 @@ body{
 .hero-sub{
   font-size:clamp(1rem,2.5vw,1.3rem);
   color:var(--text-dim);
-  max-width:640px;
+  max-width:700px;
   margin-bottom:3rem;
   font-weight:300;
   animation:fadeUp .8s ease .2s both;
@@ -115,7 +115,6 @@ body{
 }
 .stat-label{font-size:.75rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.1em}
 
-/* ===== SECTIONS ===== */
 section{padding:5rem 1.5rem}
 .container{max-width:1100px;margin:0 auto}
 
@@ -146,7 +145,6 @@ section{padding:5rem 1.5rem}
   font-weight:300;
 }
 
-/* ===== PROJECT CARDS ===== */
 .projects{display:flex;flex-direction:column;gap:4rem}
 
 .project-card{
@@ -245,7 +243,6 @@ section{padding:5rem 1.5rem}
   line-height:1.6;margin:0;
 }
 
-/* ===== ARCHITECTURE ===== */
 .arch-flow{
   background:var(--surface2);
   border:1px solid var(--border);
@@ -277,7 +274,6 @@ section{padding:5rem 1.5rem}
 .flow-node.data{background:rgba(255,180,50,0.12);border:1px solid rgba(255,180,50,0.3);color:#ffb432}
 .flow-arrow{color:var(--text-dim);font-size:1.2rem}
 
-/* ===== TECH STACK ===== */
 .tech-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -299,7 +295,48 @@ section{padding:5rem 1.5rem}
 .tech-name{font-weight:600;font-size:.9rem;margin-bottom:.2rem}
 .tech-desc{font-size:.75rem;color:var(--text-dim)}
 
-/* ===== STRENGTHS ===== */
+/* ===== SERVICES ===== */
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+}
+
+.service-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.service-card:hover{border-color:var(--accent)}
+
+.service-card::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:3px;
+}
+.service-card:nth-child(1)::before{background:var(--gradient)}
+.service-card:nth-child(2)::before{background:var(--gradient2)}
+.service-card:nth-child(3)::before{background:var(--gradient3)}
+
+.service-icon{font-size:2rem;margin-bottom:1rem}
+.service-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
+.service-card p{font-size:.9rem;color:var(--text-dim);line-height:1.7;margin-bottom:.8rem}
+.service-list{list-style:none;padding:0}
+.service-list li{
+  font-size:.85rem;color:var(--text-dim);
+  padding:.3rem 0;
+  padding-left:1.2rem;
+  position:relative;
+}
+.service-list li::before{
+  content:'';position:absolute;left:0;top:.7rem;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent3);
+}
+
 .strengths-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -323,7 +360,7 @@ section{padding:5rem 1.5rem}
 }
 .strength-card:nth-child(1)::before{background:var(--gradient)}
 .strength-card:nth-child(2)::before{background:var(--gradient2)}
-.strength-card:nth-child(3)::before{background:linear-gradient(135deg,#ff6b6b,#ffa07a)}
+.strength-card:nth-child(3)::before{background:var(--gradient3)}
 
 .strength-num{
   font-family:var(--font-mono);
@@ -333,7 +370,6 @@ section{padding:5rem 1.5rem}
 .strength-card h3{font-size:1.15rem;font-weight:700;margin-bottom:.6rem}
 .strength-card p{font-size:.9rem;color:var(--text-dim);line-height:1.7}
 
-/* ===== CONTACT ===== */
 .contact-section{
   text-align:center;
   padding:6rem 1.5rem;
@@ -373,7 +409,6 @@ section{padding:5rem 1.5rem}
   border:1px solid var(--border);
 }
 
-/* ===== FOOTER ===== */
 footer{
   text-align:center;
   padding:2rem;
@@ -382,7 +417,6 @@ footer{
   color:var(--text-dim);
 }
 
-/* ===== ANIMATIONS ===== */
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
@@ -398,7 +432,6 @@ footer{
 }
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
-/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   .hero-stats{gap:2rem}
   .project-header{padding:1.5rem 1.5rem 0}
@@ -406,6 +439,7 @@ footer{
   .project-body{padding:1.5rem}
   .contact-box{padding:2rem 1.5rem}
   .feature-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -413,21 +447,67 @@ footer{
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-badge">AVAILABLE FOR WORK</div>
-  <h1>業務の「手作業」を<br><span class="gradient-text">仕組みで解決する</span></h1>
-  <p class="hero-sub">GAS × AI × LINE で、現場の業務フローをゼロから自動化。<br>設計から実装・運用まで一貫して対応します。</p>
+  <div class="hero-badge">COO × AI AUTOMATION ENGINEER</div>
+  <h1>業務の手作業を<br><span class="gradient-text">AIで仕組み化する</span></h1>
+  <p class="hero-sub">経営視点で「どこを自動化すべきか」を判断し、設計から実装・運用定着まで一貫対応。<br>構築だけでなく、AI導入支援・社内研修まで対応します。</p>
   <div class="hero-stats">
     <div class="stat">
       <div class="stat-num">5+</div>
       <div class="stat-label">Systems Built</div>
     </div>
     <div class="stat">
-      <div class="stat-num">GAS</div>
-      <div class="stat-label">Core Stack</div>
+      <div class="stat-num">COO</div>
+      <div class="stat-label">経営 × 開発</div>
     </div>
     <div class="stat">
       <div class="stat-num">AI</div>
-      <div class="stat-label">API Integration</div>
+      <div class="stat-label">導入・構築・研修</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-label fade-in">Services</div>
+    <h2 class="section-title fade-in">対応可能な業務</h2>
+    <p class="section-desc fade-in">構築から導入支援・研修まで、ワンストップで対応します。</p>
+
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">⚡</div>
+        <h3>業務自動化の設計・構築</h3>
+        <p>業務フローを分析し、最適な自動化システムを設計・実装します。</p>
+        <ul class="service-list">
+          <li>GAS / API連携による業務自動化</li>
+          <li>LINE Bot / チャットボット構築</li>
+          <li>AI（ChatGPT / Claude / Gemini）活用開発</li>
+          <li>スプレッドシート連携ツール開発</li>
+          <li>SNS運用の自動化・効率化</li>
+        </ul>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🎯</div>
+        <h3>AI導入コンサルティング</h3>
+        <p>「AIを使いたいけど何から始めれば？」にお答えします。</p>
+        <ul class="service-list">
+          <li>AI活用の業務診断・自動化提案</li>
+          <li>AIツール選定支援（比較・最適提案）</li>
+          <li>導入計画の策定・ロードマップ作成</li>
+          <li>初期セットアップ・運用定着サポート</li>
+        </ul>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">📚</div>
+        <h3>AI活用研修・トレーニング</h3>
+        <p>社員がAIを「自分で使いこなせる」状態を目指します。</p>
+        <ul class="service-list">
+          <li>ChatGPT / Claude の実務活用研修</li>
+          <li>プロンプト設計の基礎〜実践</li>
+          <li>業務別AIツール活用ワークショップ</li>
+          <li>導入後のフォローアップ</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -504,7 +584,7 @@ footer{
           <div class="project-icon pdf">📄</div>
           <div class="project-meta">
             <h3>PDF → 会計データ自動化</h3>
-            <p class="project-tagline">総勘定元帳PDFをAIで解析し仕訳データへ自動転記</p>
+            <p class="project-tagline">会計帳票PDFをAIで解析し仕訳データへ自動転記</p>
           </div>
         </div>
         <div class="project-tags">
@@ -514,12 +594,12 @@ footer{
           <span class="tag">Google Drive API</span>
         </div>
         <div class="project-body">
-          <p>総勘定元帳のPDFをGemini APIで解析し、JSON形式でデータを抽出。科目マスタと連携してコードを自動変換し、仕訳データとしてスプレッドシートへ自動転記。処理済みファイルの自動振り分けまで対応しています。</p>
+          <p>会計帳票のPDFをGemini APIで解析し、JSON形式でデータを抽出。科目マスタと連携してコードを自動変換し、仕訳データとしてスプレッドシートへ自動転記。処理済みファイルの自動振り分けまで対応しています。</p>
 
           <div class="feature-grid">
             <div class="feature">
               <div class="feature-title"><span class="dot"></span>AI-PDF解析</div>
-              <p>Gemini APIで総勘定元帳PDFの内容を解析し、構造化データとして抽出</p>
+              <p>Gemini APIで会計帳票PDFの内容を解析し、構造化データとして抽出</p>
             </div>
             <div class="feature">
               <div class="feature-title"><span class="dot"></span>科目マスタ連携</div>
@@ -744,18 +824,18 @@ footer{
     <div class="strengths-grid">
       <div class="strength-card fade-in">
         <div class="strength-num">01</div>
-        <h3>現場目線の設計力</h3>
-        <p>「ITに詳しくない現場スタッフ」が迷わず使えることを最優先に設計。ボタン1つ、LINE送信1つで完結する操作性を徹底しています。利用ガイドの作成まで対応します。</p>
+        <h3>経営視点 × 技術力</h3>
+        <p>COOとして業務オペレーション全体を管理する経験から、「どこを自動化すれば最もインパクトがあるか」を判断できます。技術だけでなくビジネス成果に直結する提案が可能です。</p>
       </div>
       <div class="strength-card fade-in">
         <div class="strength-num">02</div>
-        <h3>設計から運用まで一貫対応</h3>
-        <p>業務フローのヒアリング → 全体設計 → GAS実装 → API連携 → テスト → 運用ドキュメント作成まで、ワンストップで対応可能。外部ツールとの連携設計も得意です。</p>
+        <h3>現場に定着する設計</h3>
+        <p>「ITに詳しくない現場スタッフ」が迷わず使えることを最優先に設計。ボタン1つ、LINE送信1つで完結する操作性を徹底。利用ガイドの作成から運用定着まで対応します。</p>
       </div>
       <div class="strength-card fade-in">
         <div class="strength-num">03</div>
         <h3>AI活用による超高速開発</h3>
-        <p>ChatGPT・Claude・Claude Code・Geminiを開発プロセスに組み込み、コード生成・リファクタリング・デバッグ・ドキュメント作成を高速化。AIプロンプト設計の知見を活かし、システム内のAI連携も実装します。</p>
+        <p>ChatGPT・Claude・Claude Code・Geminiを開発プロセスに組み込み、コード生成・リファクタリング・デバッグを高速化。AIプロンプト設計の知見を活かし、システム内のAI連携も実装します。</p>
       </div>
     </div>
   </div>
@@ -765,9 +845,9 @@ footer{
 <section class="contact-section">
   <div class="contact-box fade-in">
     <h2>お気軽にご相談ください</h2>
-    <p>業務フローの自動化について、まずはお話をお聞かせください。最適な構成をご提案いたします。</p>
+    <p>業務の自動化・AI導入について、まずはお話をお聞かせください。<br>構築・導入支援・研修まで、最適な形をご提案いたします。</p>
     <div class="contact-info">
-      週15〜30時間稼働可能 ／ オンライン面談対応可
+      稼働時間：案件により要相談 ／ オンライン・現地面談 対応可
     </div>
   </div>
 </section>
@@ -777,7 +857,6 @@ footer{
 </footer>
 
 <script>
-// Intersection Observer for fade-in animations
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
