@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — 業務自動化エンジニア</title>
+<title>Portfolio — AI自動化エンジニア</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -178,6 +178,7 @@ section{padding:5rem 1.5rem}
 .project-icon.clock{background:linear-gradient(135deg,#4f8cff,#3a6fd8)}
 .project-icon.app{background:linear-gradient(135deg,#7c5cfc,#6240d9)}
 .project-icon.shift{background:linear-gradient(135deg,#00d4aa,#00b894)}
+.project-icon.pdf{background:linear-gradient(135deg,#ff6b6b,#ee5a24)}
 
 .project-meta{flex:1;min-width:240px}
 .project-meta h3{
@@ -417,7 +418,7 @@ footer{
   <p class="hero-sub">GAS × AI × LINE で、現場の業務フローをゼロから自動化。<br>設計から実装・運用まで一貫して対応します。</p>
   <div class="hero-stats">
     <div class="stat">
-      <div class="stat-num">4+</div>
+      <div class="stat-num">5+</div>
       <div class="stat-label">Systems Built</div>
     </div>
     <div class="stat">
@@ -497,7 +498,46 @@ footer{
         </div>
       </article>
 
-      <!-- PROJECT 2: 勤怠自動集計 -->
+      <!-- PROJECT 2: PDF → 会計データ -->
+      <article class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon pdf">📄</div>
+          <div class="project-meta">
+            <h3>PDF → 会計データ自動化</h3>
+            <p class="project-tagline">総勘定元帳PDFをAIで解析し仕訳データへ自動転記</p>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">GAS</span>
+          <span class="tag">Gemini API</span>
+          <span class="tag">Spreadsheet</span>
+          <span class="tag">Google Drive API</span>
+        </div>
+        <div class="project-body">
+          <p>総勘定元帳のPDFをGemini APIで解析し、JSON形式でデータを抽出。科目マスタと連携してコードを自動変換し、仕訳データとしてスプレッドシートへ自動転記。処理済みファイルの自動振り分けまで対応しています。</p>
+
+          <div class="feature-grid">
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>AI-PDF解析</div>
+              <p>Gemini APIで総勘定元帳PDFの内容を解析し、構造化データとして抽出</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>科目マスタ連携</div>
+              <p>勘定科目コードを自動変換し、会計システムに取り込める形式で出力</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>自動転記</div>
+              <p>整形された仕訳データをスプレッドシートへ自動入力。手入力ゼロ</p>
+            </div>
+            <div class="feature">
+              <div class="feature-title"><span class="dot"></span>ファイル自動整理</div>
+              <p>処理済みPDFを自動でアーカイブフォルダに移動。二重処理を防止</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3: 勤怠自動集計 -->
       <article class="project-card fade-in">
         <div class="project-header">
           <div class="project-icon clock">⏱️</div>
@@ -544,7 +584,7 @@ footer{
         </div>
       </article>
 
-      <!-- PROJECT 3: 勤怠管理アプリ -->
+      <!-- PROJECT 4: 勤怠管理アプリ -->
       <article class="project-card fade-in">
         <div class="project-header">
           <div class="project-icon app">📲</div>
@@ -579,7 +619,7 @@ footer{
         </div>
       </article>
 
-      <!-- PROJECT 4: シフト作成 -->
+      <!-- PROJECT 5: シフト作成 -->
       <article class="project-card fade-in">
         <div class="project-header">
           <div class="project-icon shift">📅</div>
@@ -661,6 +701,16 @@ footer{
         <div class="tech-desc">開発支援・プロンプト設計</div>
       </div>
       <div class="tech-item fade-in">
+        <span class="tech-icon">💻</span>
+        <div class="tech-name">Claude Code</div>
+        <div class="tech-desc">コード生成・リファクタリング・デバッグ</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">🚀</span>
+        <div class="tech-name">Antigravity</div>
+        <div class="tech-desc">AIエージェント開発支援</div>
+      </div>
+      <div class="tech-item fade-in">
         <span class="tech-icon">📁</span>
         <div class="tech-name">Google Drive API</div>
         <div class="tech-desc">ファイル自動管理</div>
@@ -669,6 +719,16 @@ footer{
         <span class="tech-icon">🔗</span>
         <div class="tech-name">Webhook / REST API</div>
         <div class="tech-desc">外部サービス連携</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">🌐</span>
+        <div class="tech-name">JavaScript / HTML / CSS</div>
+        <div class="tech-desc">フロントエンド開発</div>
+      </div>
+      <div class="tech-item fade-in">
+        <span class="tech-icon">🐙</span>
+        <div class="tech-name">Git / GitHub</div>
+        <div class="tech-desc">バージョン管理・ポートフォリオ</div>
       </div>
     </div>
   </div>
@@ -694,8 +754,8 @@ footer{
       </div>
       <div class="strength-card fade-in">
         <div class="strength-num">03</div>
-        <h3>AI活用による高速開発</h3>
-        <p>ChatGPT・Claude・Geminiを開発プロセスに組み込み、コード生成・デバッグ・ドキュメント作成を高速化。AIプロンプト設計の知見を活かし、システム内のAI連携も実装します。</p>
+        <h3>AI活用による超高速開発</h3>
+        <p>ChatGPT・Claude・Claude Code・Geminiを開発プロセスに組み込み、コード生成・リファクタリング・デバッグ・ドキュメント作成を高速化。AIプロンプト設計の知見を活かし、システム内のAI連携も実装します。</p>
       </div>
     </div>
   </div>
@@ -707,13 +767,13 @@ footer{
     <h2>お気軽にご相談ください</h2>
     <p>業務フローの自動化について、まずはお話をお聞かせください。最適な構成をご提案いたします。</p>
     <div class="contact-info">
-      週15〜20時間稼働可能 ／ オンライン面談対応可
+      週15〜30時間稼働可能 ／ オンライン面談対応可
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Portfolio — 業務自動化エンジニア</p>
+  <p>Portfolio — AI自動化エンジニア</p>
 </footer>
 
 <script>
